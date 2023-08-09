@@ -8,7 +8,6 @@ from utilities.data_source import DataSource
 
 
 class TestLogin(AutomationWrapper):
-
     @pytest.mark.parametrize(
         "username, password, language, expected_title", DataSource.test_valid_login_data)
     def test_valid_login(self, username, password, language, expected_title):
