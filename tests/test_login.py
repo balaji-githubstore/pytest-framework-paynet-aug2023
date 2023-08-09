@@ -4,17 +4,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
 from base.webdriver_wrapper import AutomationWrapper
+from utilities.data_source import DataSource
 
 
 class TestLogin(AutomationWrapper):
 
     @pytest.mark.parametrize(
-        "username, password, language, expected_title",
-        [
-            ["admin","pass","English (Indian)", "OpenEMR"],
-            ["accountant","accountant","English (Indian)", "OpenEMR"]
-        ]
-    )
+        "username, password, language, expected_title", DataSource.test_valid_login_data)
     def test_valid_login(self, username, password, language, expected_title):
         self.driver.find_element(By.ID, "authUser").send_keys(username)
         self.driver.find_element(By.CSS_SELECTOR, "#clearPass").send_keys(password)
@@ -23,14 +19,15 @@ class TestLogin(AutomationWrapper):
         self.driver.find_element(By.ID, "login-button").click()
         assert_that(self.driver.title).is_equal_to(expected_title)
 
-    def test_invalid_login(self):
-        self.driver.find_element(By.ID, "authUser").send_keys("john")
-        self.driver.find_element(By.CSS_SELECTOR, "#clearPass").send_keys("john123")
+    @pytest.mark.parametrize("username,password,language,expected_error", DataSource.test_invalid_data)
+    def test_invalid_login(self, username, password, language, expected_error):
+        self.driver.find_element(By.ID, "authUser").send_keys(username)
+        self.driver.find_element(By.CSS_SELECTOR, "#clearPass").send_keys(password)
         select_language = Select(self.driver.find_element(By.XPATH, "//select[@name='languageChoice']"))
-        select_language.select_by_visible_text("English (Indian)")
+        select_language.select_by_visible_text(language)
         self.driver.find_element(By.ID, "login-button").click()
         actual_error = self.driver.find_element(By.XPATH, "//p[contains(text(),'Invalid')]").text
-        assert_that(actual_error).is_equal_to("Invalid username or password")
+        assert_that(actual_error).is_equal_to(expected_error)
 
 
 class TestLoginUI(AutomationWrapper):
