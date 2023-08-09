@@ -1,3 +1,4 @@
+from assertpy import assert_that
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
@@ -43,4 +44,5 @@ class TestPatient(AutomationWrapper):
         if len(self.driver.find_elements(By.XPATH,"//div[@class='closeDlgIframe']"))>0:
             self.driver.find_element(By.XPATH,"//div[@class='closeDlgIframe']").click()
 
+        assert_that(actual_alert_text).contains("Tobacco")
         # Assert the text displayed - Medical Record Dashboard - john wick
