@@ -28,3 +28,9 @@ class LoginPage:
 
     def get_application_description(self):
         return self.driver.find_element(By.XPATH, "//p[contains(text(),'most')]").text
+
+    def get_username_placeholder(self):
+        return self.driver.find_element(By.ID, "authUser").get_attribute("placeholder")
+
+    def get_password_placeholder(self):
+        return self.driver.find_element(By.CSS_SELECTOR, "#clearPass").get_attribute("placeholder")

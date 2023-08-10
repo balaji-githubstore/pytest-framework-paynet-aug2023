@@ -1,5 +1,6 @@
 import pytest
 from assertpy import assert_that
+from selenium.webdriver.common.by import By
 
 from base.webdriver_wrapper import AutomationWrapper
 from pages.login_page import LoginPage
@@ -40,3 +41,10 @@ class TestLoginUI(AutomationWrapper):
     def test_app_description(self):
         login_page = LoginPage(self.driver)
         assert_that(login_page.get_application_description()).contains("Electronic Health Record")
+
+    def test_placeholder(self):
+        login_page = LoginPage(self.driver)
+        actual_username_placeholder = login_page.get_username_placeholder()
+        actual_password_placeholder = login_page.get_password_placeholder()
+        assert_that(actual_username_placeholder).is_equal_to("Username")
+        assert_that(actual_password_placeholder).is_equal_to("Password")
