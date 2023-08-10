@@ -18,3 +18,5 @@ class WebDriverKeywords:
     def get_text_by_locator(self, locator: Tuple[str, str]):
         return self.wait.until(expected_conditions.visibility_of_element_located(locator)).text
 
+    def get_attribute_value_by_locator(self, locator: Tuple[str, str],attribute):
+        return self.wait.until(expected_conditions.visibility_of_element_located(locator)).get_attribute(attribute)
