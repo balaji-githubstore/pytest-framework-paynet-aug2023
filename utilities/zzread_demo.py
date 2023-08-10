@@ -1,6 +1,7 @@
 # """Will be deleted - not part of the framework"""
 import pandas
 
+import config
 from utilities import read_utils
 
 # df=pandas.read_excel(io="../test_data/open_emr_data.xlsx",sheet_name="test_valid_login")
@@ -33,4 +34,8 @@ for i in df.index:
     print(tuple(df.loc[i]))
     list.append(tuple(df.loc[i]))
 
+
 print(list)
+
+
+print(config.path)

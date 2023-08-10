@@ -7,7 +7,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 class WebDriverKeywords:
     def __init__(self, driver):
         self.driver = driver
-        self.wait = WebDriverWait(self.driver, 40)
+        self.wait = WebDriverWait(self.driver, 0)
 
     def click_by_locator(self, locator: Tuple[str, str]):
         self.wait.until(expected_conditions.visibility_of_element_located(locator)).click()

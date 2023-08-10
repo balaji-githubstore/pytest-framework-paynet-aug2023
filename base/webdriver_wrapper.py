@@ -15,7 +15,7 @@ class AutomationWrapper:
             self.driver = webdriver.Chrome()
 
         self.driver.maximize_window()
-        self.driver.implicitly_wait(20)
+        self.driver.implicitly_wait(0)
         self.driver.get("https://demo.openemr.io/b/openemr")
         yield
         # below code runs after each test method

@@ -1,3 +1,4 @@
+import pytest
 from assertpy import assert_that
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
@@ -9,6 +10,7 @@ from pages.login_page import LoginPage
 
 
 class TestPatient(AutomationWrapper):
+    @pytest.mark.smoke
     def test_add_valid_patient(self):
 
         login_page = LoginPage(self.driver)

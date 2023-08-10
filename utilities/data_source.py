@@ -1,3 +1,4 @@
+import config
 from utilities import read_utils
 
 
@@ -12,7 +13,7 @@ class DataSource:
         ["kim", "kim123", "Dutch", "Invalid username or password"]
     ]
 
-    test_valid_login_data_excel = read_utils.get_sheet_into_list("../test_data/open_emr_data.xlsx",
+    test_valid_login_data_excel = read_utils.get_sheet_into_list(config.test_data_path+"\\open_emr_data.xlsx",
                                                                  "test_valid_login")
 
-    test_valid_login_data_csv=read_utils.get_csv_into_list("../test_data/test_valid_login.csv")
+    test_valid_login_data_csv=read_utils.get_csv_into_list(config.test_data_path+"\\test_valid_login.csv")

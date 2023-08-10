@@ -9,6 +9,8 @@ from utilities.data_source import DataSource
 
 
 class TestLogin(AutomationWrapper):
+    @pytest.mark.login
+    @pytest.mark.smoke
     @pytest.mark.parametrize(
         "username, password, language, expected_title", DataSource.test_valid_login_data_csv)
     def test_valid_login(self, username, password, language, expected_title):
@@ -21,6 +23,7 @@ class TestLogin(AutomationWrapper):
         main_page = MainPage(self.driver)
         assert_that(main_page.get_main_page_title()).is_equal_to(expected_title)
 
+    @pytest.mark.login
     @pytest.mark.parametrize("username,password,language,expected_error", DataSource.test_invalid_data)
     def test_invalid_login(self, username, password, language, expected_error):
         login_page = LoginPage(self.driver)
@@ -34,14 +37,18 @@ class TestLogin(AutomationWrapper):
 
 
 class TestLoginUI(AutomationWrapper):
+    @pytest.mark.smoke
+    @pytest.mark.ui
     def test_title(self):
         login_page = LoginPage(self.driver)
         assert_that(login_page.get_login_page_title).is_equal_to("OpenEMR Login")
 
+    @pytest.mark.ui
     def test_app_description(self):
         login_page = LoginPage(self.driver)
         assert_that(login_page.get_application_description()).contains("Electronic Health Record")
 
+    @pytest.mark.ui
     def test_placeholder(self):
         login_page = LoginPage(self.driver)
         actual_username_placeholder = login_page.get_username_placeholder()
