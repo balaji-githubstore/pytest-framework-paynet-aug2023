@@ -9,7 +9,7 @@ from utilities.data_source import DataSource
 
 class TestLogin(AutomationWrapper):
     @pytest.mark.parametrize(
-        "username, password, language, expected_title", DataSource.test_valid_login_data)
+        "username, password, language, expected_title", DataSource.test_valid_login_data_csv)
     def test_valid_login(self, username, password, language, expected_title):
         self.driver.find_element(By.ID, "authUser").send_keys(username)
         self.driver.find_element(By.CSS_SELECTOR, "#clearPass").send_keys(password)
