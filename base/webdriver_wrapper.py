@@ -6,7 +6,7 @@ class AutomationWrapper:
     @pytest.fixture(scope="function", autouse=True)
     def setup(self):
         # below code runs before each test method
-        browser = "edge"
+        browser = "chrome"
         if browser == "edge":
             self.driver = webdriver.Edge()
         elif browser == "ff":
